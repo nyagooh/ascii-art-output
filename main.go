@@ -6,7 +6,7 @@ import (
 	"strings"
 	"log"
 	"os"
-	art "output/functions"
+	art "output/output"
 )
 
 func main() {

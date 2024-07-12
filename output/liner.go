@@ -1,6 +1,6 @@
-package functions
+package output
 
-// liner function calculates mathematically the line number of each rune contained in the input string.
+// calculates mathematically the line number of each rune contained in the input string.
 func FndLine(r rune) []int {
 	lineNumbers := make([]int, 8)
 	for i := 0; i < 8; i++ {
@@ -9,12 +9,13 @@ func FndLine(r rune) []int {
 	return lineNumbers
 }
 
+/*
+connects the input string and the FndLine() function
+*/
 func ProcessLine(line string) []int {
 	var result []int
 	for _, char := range line {
-		lineNumbers := FndLine(char)
-		result = append(result, lineNumbers...)
-
+		result = FndLine(char)
 	}
 	return result
 }
