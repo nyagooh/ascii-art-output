@@ -10,13 +10,10 @@ the function validates the passed string input and splits
 by the "\n".
 */
 func ProcessFile(banner string, input string) string {
-	var str, filename, printable, betterStr string
+	var str, filename, printable string
 	filename = fmt.Sprintf("%s%s", banner, ".txt")
 	printable = NonPrintable(input)
-	if strings.Contains(printable, "\\t") {
-		betterStr = strings.ReplaceAll(printable, "\\t", "    ")
-	}
-	lines := strings.Split(betterStr, "\\n")
+	lines := strings.Split(printable, "\\n")
 	for _, line := range lines {
 		if line != "" {
 			result := ProcessLine(line)

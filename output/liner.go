@@ -15,7 +15,7 @@ connects the input string and the FndLine() function
 func ProcessLine(line string) []int {
 	var result []int
 	for _, char := range line {
-		result = FndLine(char)
+		result = append(result, FndLine(char)...)
 	}
 	return result
 }
