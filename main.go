@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 
@@ -45,7 +44,8 @@ func main() {
 		input = args[0]
 		output = os.Args[1][9:]
 		if !strings.HasSuffix(output, ".txt") {
-			log.Fatal("wrong file extension: file must have a '.txt' extension")
+			fmt.Println("Usage: go run . [OPTION] [STRING] [BANNER]\n\nEX: go run . --output=<fileName.txt> something standard")
+			return
 		}
 		art.LessArguments(output, input)
 
@@ -58,8 +58,15 @@ func main() {
 		} else {
 			banner = strings.ToLower(banner)
 		}
-		result := art.ProcessFile(banner, input)
-		fmt.Println(result)
+		lines := strings.Split(input, "\\n")
+		for _, line := range lines {
+			if line != "" {
+				result := art.ProcessFile(banner, line)
+				fmt.Println(result)
+			} else {
+				fmt.Println()
+			}
+		}
 
 		// output incooperated
 	} else if len(args) == 2 && flag.NFlag() == 1 {
