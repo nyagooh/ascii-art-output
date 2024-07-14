@@ -30,9 +30,17 @@ func main() {
 	output = *outputFlag
 	if len(args) == 1 && flag.NFlag() < 1 && !strings.HasSuffix(args[0], ".txt") {
 		input = os.Args[1]
-		banner = "standard"
-		result := art.ProcessFile(banner, input)
-		fmt.Println(result)
+		lines := strings.Split(input, "\\n")
+		for _, line := range lines {
+			if line != "" {
+				banner = "standard"
+				result := art.ProcessFile(banner, line)
+				fmt.Println(result)
+			} else {
+				fmt.Println()
+			}
+		}
+
 	} else if len(args) == 1 && flag.NFlag() == 1 {
 		input = args[0]
 		output = os.Args[1][9:]
@@ -41,7 +49,7 @@ func main() {
 		}
 		art.LessArguments(output, input)
 
-		//fs project incooperated here.
+		// fs project incooperated here.
 	} else if len(args) == 2 && flag.NFlag() < 1 {
 		input = args[0]
 		banner = args[1]
@@ -53,7 +61,7 @@ func main() {
 		result := art.ProcessFile(banner, input)
 		fmt.Println(result)
 
-		//output incooperated
+		// output incooperated
 	} else if len(args) == 2 && flag.NFlag() == 1 {
 		input = args[0]
 		art.Ascii_Output(output, input, args)
