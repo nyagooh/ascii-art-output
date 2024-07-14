@@ -1,8 +1,7 @@
-package functions
+package output
 
 import (
 	"fmt"
-	// "os"
 	"strings"
 )
 
