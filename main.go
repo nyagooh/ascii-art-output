@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 
@@ -30,18 +29,27 @@ func main() {
 	output = *outputFlag
 	if len(args) == 1 && flag.NFlag() < 1 && !strings.HasSuffix(args[0], ".txt") {
 		input = os.Args[1]
-		banner = "standard"
-		result := art.ProcessFile(banner, input)
-		fmt.Println(result)
+		lines := strings.Split(input, "\\n")
+		for _, line := range lines {
+			if line != "" {
+				banner = "standard"
+				result := art.ProcessFile(banner, line)
+				fmt.Println(result)
+			} else {
+				fmt.Println()
+			}
+		}
+
 	} else if len(args) == 1 && flag.NFlag() == 1 {
 		input = args[0]
 		output = os.Args[1][9:]
 		if !strings.HasSuffix(output, ".txt") {
-			log.Fatal("wrong file extension: file must have a '.txt' extension")
+			fmt.Println("Usage: go run . [OPTION] [STRING] [BANNER]\n\nEX: go run . --output=<fileName.txt> something standard")
+			return
 		}
 		art.LessArguments(output, input)
 
-		//fs project incooperated here.
+		// fs project incooperated here.
 	} else if len(args) == 2 && flag.NFlag() < 1 {
 		input = args[0]
 		banner = args[1]
@@ -50,10 +58,17 @@ func main() {
 		} else {
 			banner = strings.ToLower(banner)
 		}
-		result := art.ProcessFile(banner, input)
-		fmt.Println(result)
+		lines := strings.Split(input, "\\n")
+		for _, line := range lines {
+			if line != "" {
+				result := art.ProcessFile(banner, line)
+				fmt.Println(result)
+			} else {
+				fmt.Println()
+			}
+		}
 
-		//output incooperated
+		// output incooperated
 	} else if len(args) == 2 && flag.NFlag() == 1 {
 		input = args[0]
 		art.Ascii_Output(output, input, args)
