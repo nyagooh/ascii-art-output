@@ -2,25 +2,27 @@ package output
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"strings"
 )
 
 func Ascii_Output(output, input string, args []string) {
 	if !strings.HasSuffix(output, ".txt") {
-		log.Fatal("wrong file extension: file must have a '.txt' extension")
+		fmt.Println("Usage: go run . [OPTION] [STRING] [BANNER]\n\nEX: go run . --output=<fileName.txt> something standard")
+		return
 	}
 	if output == "shadow.txt" || output == "standard.txt" || output == "thinkertoy.txt" {
-		log.Fatal("The name of the text file is the same as the banner file name. Please use a different file name.")
+		fmt.Println("The name of the text file is the same as the banner file name. Please use a different file name.")
+		os.Exit(0)
 	}
 	if strings.Count(output, ".") > 1 {
-		log.Fatal("Usage: filename.txt")
+		fmt.Println("Usage: go run . [OPTION] [STRING] [BANNER]\n\nEX: go run . --output=<fileName.txt> something standard")
+		return
 	}
 	var banner string
 	if strings.HasSuffix(args[1], ".txt") {
-		new := args[:(len(args[1]) - 4)]
-		banner = strings.ToLower(strings.Join(new, ""))
+		new := strings.TrimSuffix(args[1], ".txt")
+		banner = strings.ToLower(new)
 	} else {
 		banner = strings.ToLower(args[1])
 	}
