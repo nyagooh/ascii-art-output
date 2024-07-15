@@ -6,6 +6,9 @@ import (
 	"strings"
 )
 
+/*
+This function takes the output file and the input string and a slice of strings(args) which is used to retrieve the banner file.
+*/
 func Ascii_Output(output, input string, args []string) {
 	if !strings.HasSuffix(output, ".txt") {
 		fmt.Println("Usage: go run . [OPTION] [STRING] [BANNER]\n\nEX: go run . --output=<fileName.txt> something standard")
