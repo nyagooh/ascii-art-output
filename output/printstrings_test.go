@@ -27,4 +27,3 @@ func TestProcessString(t *testing.T) {
 		})
 	}
 }
-
