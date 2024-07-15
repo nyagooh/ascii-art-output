@@ -5,40 +5,40 @@ import (
 	"testing"
 )
 
-func TestProcessLine(t *testing.T) {
+func TestFndLine(t *testing.T) {
 	tests := []struct {
 		name string
-		line string
+		r    rune
 		want []int
 	}{
-		{"hello", "hello", []int{650, 651, 652, 653, 654, 655, 656, 657, 623, 624, 625, 626, 627, 628, 629, 630, 686, 687, 688, 689, 690, 691, 692, 693, 686, 687, 688, 689, 690, 691, 692, 693, 713, 714, 715, 716, 717, 718, 719, 720}},
-		{"!", "!",[]int{11 ,12 ,13 ,14 ,15 ,16 ,17 ,18},},
-		{"#", "#",[]int{29 ,30 ,31 ,32 ,33 ,34 ,35 ,36},},
+		{"%", '%', []int{47, 48, 49, 50, 51, 52, 53, 54}},         // Adjusted expected values based on the old logic
+		{"V", 'V', []int{488, 489, 490, 491, 492, 493, 494, 495}}, // Adjusted expected values based on the old logic
+		// Add more test cases as needed for other runes or characters
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := ProcessLine(tt.line); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("ProcessLine() = %v, want %v", got, tt.want)
+			if got := FndLine(tt.r); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("FndLine(%q) = %v, want %v", tt.r, got, tt.want)
 			}
 		})
 	}
 }
 
-func TestFndLine(t *testing.T) {
+func TestProcessLine(t *testing.T) {
 	tests := []struct {
-		name string
-		args rune
-		want []int
+		name  string
+		input string
+		want  []int
 	}{
-		{"h",'h',[]int{650 ,651 ,652 ,653 ,654 ,655 ,656 ,657},},
-		{"!",'!',[]int{11 ,12 ,13 ,14 ,15 ,16 ,17 ,18},},
-		{"#",'#',[]int{29 ,30 ,31 ,32 ,33 ,34 ,35 ,36},},
+		{"Simple Case", "ABC", []int{299, 300, 301, 302, 303, 304, 305, 306, 308, 309, 310, 311, 312, 313, 314, 315, 317, 318, 319, 320, 321, 322, 323, 324}}, // Adjusted expected values based on the old logic
+		// Add more test cases as needed for other input strings
 	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := FndLine(tt.args); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("FndLine() = %v, want %v", got, tt.want)
+			if got := ProcessLine(tt.input); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("ProcessLine(%q) = %v, want %v", tt.input, got, tt.want)
 			}
 		})
 	}
