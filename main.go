@@ -10,16 +10,22 @@ import (
 )
 
 func main() {
-	outputFlag := flag.String("output", "output.txt", "Output file name")
-	flag.Parse()
-	art.ValidFlag()
-	args := flag.Args()
-	if len(args) < 1 || len(args) > 3 {
+	if len(os.Args) == 1 || len(os.Args) > 4 {
 		fmt.Println(`Usage: go run . [OPTION] [STRING] [BANNER]
 			
 EX: go run . --output=<fileName.txt> something "standard"`)
 		os.Exit(0)
 	}
+	outputFlag := flag.String("output", "output.txt", "Output file name")
+	if len(os.Args) == 1 {
+		fmt.Println(`Usage: go run . [OPTION] [STRING] [BANNER]
+			
+EX: go run . --output=<fileName.txt> something "standard"`)
+		os.Exit(0)
+	}
+	flag.Parse()
+	art.ValidFlag()
+	args := flag.Args()
 	if args[0] == "" {
 		return
 	}
@@ -46,10 +52,8 @@ EX: go run . --output=<fileName.txt> something "standard"`)
 		input = args[0]
 		output = os.Args[1][9:]
 		if !strings.HasSuffix(output, ".txt") {
-			fmt.Println(`Usage: go run . [OPTION] [STRING] [BANNER]
-			
-EX: go run . --output=<fileName.txt> something "standard"`)
-			os.Exit(0)
+			fmt.Println("Usage: go run . [OPTION] [STRING] [BANNER]\n\nEX: go run . --output=<fileName.txt> something standard")
+			return
 		}
 		art.LessArguments(output, input)
 
