@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	if len(os.Args) == 1 || len(os.Args) > 4 {
+	if len(os.Args) == 1 || len(os.Args) > 4 || len(os.Args) == 2 && strings.HasPrefix(os.Args[1], "--output="){
 		fmt.Println(`Usage: go run . [OPTION] [STRING] [BANNER]
 			
 EX: go run . --output=<fileName.txt> something "standard"`)
