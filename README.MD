@@ -56,7 +56,7 @@ cd ascii-art-output
 ```
 2. Run the program
 ```bash
-go run --output=filename.txt hello standard
+go run  . --output=filename.txt hello standard
 ```
 The program will create a file called filename.txt and write the string hello in its Ascii Art format depending on the file specified.To see whats written in the file:
 ```bash
