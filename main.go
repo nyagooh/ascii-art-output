@@ -30,6 +30,7 @@ EX: go run . --output=<fileName.txt> something "standard"`)
 		fmt.Println(`Usage: go run . [OPTION] [STRING] [BANNER]
 		
 EX: go run . --output=<fileName.txt> something "standard"`)
+return
 	}
 	if len(args) < 1 {
 		return
