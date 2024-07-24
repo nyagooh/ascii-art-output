@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	if len(os.Args) == 1 || len(os.Args) > 4 || len(os.Args) == 2 && strings.HasPrefix(os.Args[1], "--output="){
+	if len(os.Args) == 1 || len(os.Args) > 4 || len(os.Args) == 2 && strings.HasPrefix(os.Args[1], "--output=") {
 		fmt.Println(`Usage: go run . [OPTION] [STRING] [BANNER]
 			
 EX: go run . --output=<fileName.txt> something "standard"`)
@@ -26,6 +26,14 @@ EX: go run . --output=<fileName.txt> something "standard"`)
 	flag.Parse()
 	art.ValidFlag()
 	args := flag.Args()
+	if strings.HasPrefix(os.Args[1], "-output") {
+		fmt.Println(`Usage: go run . [OPTION] [STRING] [BANNER]
+		
+EX: go run . --output=<fileName.txt> something "standard"`)
+	}
+	if len(args) < 1 {
+		return
+	}
 	if args[0] == "" {
 		return
 	}
@@ -42,7 +50,7 @@ EX: go run . --output=<fileName.txt> something "standard"`)
 			if line != "" {
 				banner = "standard"
 				result := art.ProcessFile(banner, line)
-				fmt.Println(result)
+				fmt.Print(result)
 			} else {
 				fmt.Println()
 			}
